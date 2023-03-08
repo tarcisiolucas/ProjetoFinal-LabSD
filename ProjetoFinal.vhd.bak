@@ -1,0 +1,137 @@
+-- Quartus II VHDL Template
+-- Four-State Mealy State Machine
+
+-- A Mealy machine has outputs that depend on both the state and
+-- the inputs.	When the inputs change, the outputs are updated
+-- immediately, without waiting for a clock edge.  The outputs
+-- can be written more than once per state or per clock cycle.
+
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity ProjetoFinal is
+
+	port
+	(
+		clk		       : in	 std_logic;
+		Produto	       : in	 integer;
+		botao_cartao    : in	 std_logic;
+		botao_dinheiro  : in	 std_logic;
+		Pagamento_cartao: in	 std_logic;
+		Valor_cartao    : out std_logic_vector (4 downto 0);
+		Money_in        : in  std_logic_vector (4 downto 0);
+		Money_out       : out std_logic_vector (4 downto 0);
+		Pag_dinheiro    : in	 std_logic;
+		reset	          : in	 std_logic;
+		Visor           : out string;
+		saida_dispenser : out integer
+	);
+
+end entity;
+
+architecture rtl of ProjetoFinal is
+
+	TYPE Produtos IS ARRAY (0 TO 7) OF std_logic_vector(4 DOWNTO 0);
+	signal preco_produtos : Produtos;
+
+	-- Build an enumerated type for the state machine
+	type state_type is (StandBy, TipoPagamento, Cartao, Dinheiro, Troco, Dispenser);
+
+	-- Register to hold the current state
+	signal state : state_type;
+	
+	variable Liberado : std_logic;
+
+begin
+
+		preco_produtos <=("00000", "00000", "00000", "00000", "00000",
+									"00000", "00000", "00000");
+		variable preco : std_logic_vector((4 downto 0);
+		variable soma  : unsigned (4 downto 0) := "00000";
+
+	process (clk, reset)
+	begin
+
+		if reset = '1' then
+			state <= StandBy;
+
+		elsif (rising_edge(clk)) then
+
+			-- Faz a troca de estados
+			case state is
+				when StandBy=>
+					if Produto < 8 then
+						state <= TipoPagamento;
+					else
+						state <= StandBy;
+					end if;
+					
+					
+				when TipoPagamento =>
+					if botao_cartao = '1' then
+						state <= Cartao;
+					elsif botao_dinheiro = '1' then
+						state <= Dinheiro;
+					end if;
+					
+					
+				when Cartao=>
+					if Pagamento_cartao = '1' then
+						state <= Dispenser;
+					else
+						state <= StandBy;
+					end if;
+					
+					
+				when Dinheiro=>
+					if soma >= unsigned(preco) then
+						state <= Troco;
+					else
+						state <= Dinheiro;
+					end if;
+					
+					
+				when Troco=>
+					state <= Dispenser;
+					end if;
+					
+				when Dispenser=>
+					state <= StandBy;
+					end if;
+				
+			end case;
+
+		end if;
+	end process;
+
+	-- Determine the output based only on the current state
+	-- and the input (do not wait for a clock edge).
+	process (state, input)
+	begin
+			variable valor_troco  : unsigned (4 downto 0) := "00000";
+			case state is
+				-- Após a escolha do produto
+				when TipoPagamento=>
+					preco := preco_produtos(produto);
+				
+				-- Caso o cartão seja escolhido
+				when Cartao=>
+					valor_cartao <= preco;
+				
+				-- Caso o Dinheiro seja escolhid0
+				when Dinheiro=>
+					Visor <= "Falta Dinheiro";
+					soma := soma + unsigned(Money_in);
+				
+				-- Calculando o troco
+				when Troco=>
+					valor_troco := soma - unsigned(preco);
+					Money_out <= std_logic_vector(valor_troco);
+					
+				when Dispenser=>
+					saida_dispenser <= produto;
+				
+			end case;
+	end process;
+
+end rtl;

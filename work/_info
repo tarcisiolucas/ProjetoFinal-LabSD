@@ -1,0 +1,81 @@
+m255
+K3
+13
+cModel Technology
+Z0 dC:\altera\Trabalhos\Projeto Final
+Eprojetofinal
+Z1 w1616101404
+Z2 DPx4 ieee 11 numeric_std 0 22 O3PF8EB`?j9=z7KT`fn941
+Z3 DPx3 std 6 textio 0 22 5>J:;AW>W0[[dW0I6EN1Q0
+Z4 DPx4 ieee 14 std_logic_1164 0 22 5=aWaoGZSMWIcH0i^f`XF1
+Z5 dC:\altera\Trabalhos\Projeto Final
+Z6 8ProjetoFinal.vhd
+Z7 FProjetoFinal.vhd
+l0
+L13
+V1_@Z7@=U^Yf20BeM33MfK2
+Z8 OV;C;10.1d;51
+31
+Z9 !s108 1616101436.022000
+Z10 !s90 -reportprogress|300|-explicit|-93|ProjetoFinal.vhd|
+Z11 !s107 ProjetoFinal.vhd|
+Z12 o-explicit -93 -O0
+Z13 tExplicit 1
+!s100 44:AQmeNFKoI8[6QP0I891
+!i10b 1
+Artl
+R2
+R3
+R4
+DEx4 work 12 projetofinal 0 22 1_@Z7@=U^Yf20BeM33MfK2
+l50
+L34
+VecVdN_?7WGDNJ5Jm28OnV0
+R8
+31
+R9
+R10
+R11
+R12
+R13
+!s100 ^F_?Y_cK>cW^hhfVPe_:E1
+!i10b 1
+Etb_projetofinal
+Z14 w1616100732
+Z15 DPx4 ieee 16 std_logic_textio 0 22 ?Il0a149GV276[?[UMDWh2
+R2
+R3
+R4
+R5
+Z16 8tb_ProjetoFinal.vhd
+Z17 Ftb_ProjetoFinal.vhd
+l0
+L9
+VC:S>co?Y>Bfj6AXC56Soo2
+!s100 G@ae;U_Wn@>6Q`V8Yc9P01
+R8
+31
+!i10b 1
+Z18 !s108 1616101436.225000
+Z19 !s90 -reportprogress|300|-explicit|-93|tb_ProjetoFinal.vhd|
+Z20 !s107 tb_ProjetoFinal.vhd|
+R12
+R13
+Abehavior
+R15
+R2
+R3
+R4
+DEx4 work 15 tb_projetofinal 0 22 C:S>co?Y>Bfj6AXC56Soo2
+l82
+L12
+VI_M5S=`<j;5zEJ]g@^;BB3
+!s100 QY[=fBXeKeCc_PQ^WOMzf0
+R8
+31
+!i10b 1
+R18
+R19
+R20
+R12
+R13

@@ -1,0 +1,6 @@
+a saida do cartao eh
+00000
+a saida do troco eh
+01111
+a saida do dispenser eh
+10

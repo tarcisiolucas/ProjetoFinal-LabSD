@@ -1,0 +1,165 @@
+
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+use ieee.std_logic_textio.all;
+use std.textio.all;
+use ieee.numeric_std.all;
+ 
+ENTITY tb_funcao_mult IS
+END tb_funcao_mult;
+ 
+ARCHITECTURE behavior OF tb_funcao_mult IS 
+ 
+    -- Component Declaration for the Unit Under Test (UUT)
+ 
+component funcao_mult 
+	generic
+	(
+		DATA_WIDTH : natural := 4
+	);
+
+	port 
+	(
+		x	   : in std_logic_vector ((DATA_WIDTH-1) downto 0);
+		f  	: out std_logic_vector ((2*DATA_WIDTH-1) downto 0)
+	);
+end component;
+    
+	signal data_output          : std_logic_vector ((2*4-1) downto 0);
+	signal data_in              : std_logic_vector ((4-1) downto 0);
+
+	constant max_value      : natural := 8;
+	constant mim_value		: natural := 0;
+	
+	constant string1 : string := "O valor Esperado é:";
+	constant string2 : string := "valor Obtido:";
+	constant string3 : string := "Erro: o valor difere do esperado!";
+
+
+   	signal read_data_in    : std_logic:='0';
+   	signal flag_write      : std_logic:='0';   
+
+   
+   	file   inputs_data_in    : text open read_mode  is "data_in.txt";
+   	file   outputs           : text open write_mode is "saida1.txt";
+		file   outputs2          : text open write_mode is "saida2.txt";
+		file   inputs_data_in_2  : text open read_mode  is "saida1.txt";
+
+
+   	-- Clock period definitions
+   	constant PERIOD     : time := 20 ns;
+   	constant DUTY_CYCLE : real := 0.5;
+   	constant OFFSET     : time := 5 ns;
+		
+		TYPE expected_output IS ARRAY (0 TO 8) OF std_logic_vector(7 DOWNTO 0);
+		signal saida_esperada : expected_output;
+ 
+BEGIN
+	-- Instantiate the Unit Under Test (UUT) or Design Under Test (DUT)
+		saida_esperada <=("00000000", "01101100", "01110000", "00000000", "00110100",
+									"01101100", "01011000", "00011100", "00110100");
+DUT: funcao_mult 
+    port map(x       => data_in,
+             f     => data_output);
+
+------------------------------------------------------------------------------------
+----------------- processo para leer os dados do arquivo data_in.txt
+------------------------------------------------------------------------------------
+read_inputs_data_in:process
+		variable linea : line;
+		variable input : std_logic_vector((4-1) downto 0);
+	begin
+		while not endfile(inputs_data_in) loop
+		      if read_data_in = '1' then
+			    readline(inputs_data_in,linea);
+				 read(linea,input);
+				 data_in <= input;
+			  end if;
+		wait for PERIOD;
+		end loop;
+		wait;
+	end process read_inputs_data_in;	
+	
+------------------------------------------------------------------------------------
+----------------- processo para gerar os estimulos de entrada
+------------------------------------------------------------------------------------
+	
+   tb_stimulus : PROCESS
+   BEGIN
+        WAIT FOR (OFFSET);
+            read_data_in <= '1';		
+			for i in mim_value to max_value loop
+		        wait for PERIOD;
+		    end loop;
+            read_data_in <= '0';		
+		WAIT;
+   END PROCESS tb_stimulus;	
+   
+------------------------------------------------------------------------------------
+------ processo para gerar os estimulos de escrita do arquivo de saida
+------------------------------------------------------------------------------------   
+   
+   escreve_outputs : PROCESS
+   BEGIN
+         WAIT FOR (OFFSET);
+             flag_write <= '1';
+			 for i in mim_value to max_value  loop
+		         wait for PERIOD;
+		     end loop;
+             flag_write <= '0';			
+		 WAIT;
+    END PROCESS escreve_outputs;   
+   
+-- ------------------------------------------------------------------------------------
+-- ------ processo para escriber os dados de saida no arquivo .txt
+-- ------------------------------------------------------------------------------------   
+   
+	 write_outputs:process
+		 variable linea  : line;
+		 variable output : std_logic_vector (7 downto 0);
+	 begin
+		 while true loop
+			 if (flag_write ='1')then
+				 output := data_output;
+				 write(linea,output);
+				 writeline(outputs,linea);
+			 end if;
+			 wait for PERIOD;
+		 end loop; 
+	 end process write_outputs;  
+
+-- ------------------------------------------------------------------------------------
+-- ------ processo para escriber os dados de saida no arquivo .txt
+-- ------------------------------------------------------------------------------------
+
+
+
+write_saida2:process
+	variable linea : line;
+	variable input : std_logic_vector(7 downto 0);
+	variable count : integer := 0;
+	begin
+		wait for 10 ns;
+		for count in 0 to 8 loop
+				 input := data_output;
+					write(linea,string1);
+					writeline(outputs2,linea);
+					write(linea,saida_esperada(count));
+					writeline(outputs2,linea);
+					write(linea,string2);
+					writeline(outputs2,linea);
+					write(linea,input);
+					writeline(outputs2,linea);
+					if (input /= saida_esperada(count)) then
+					assert false 
+					report "O valor difere do esperado" severity error;
+					write(linea,string3);
+					writeline(outputs2,linea);
+				 end if;
+				 wait for 20 ns;
+		end loop;
+		wait;
+	end process write_saida2;
+END;
+

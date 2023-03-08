@@ -1,0 +1,11 @@
+
+State Machine - |ProjetoFinal|state
+Name state.Cancelar state.Dispenser state.Troco state.SomaDinheiro state.Dinheiro state.Cartao state.TipoPagamento state.StandBy 
+state.StandBy 0 0 0 0 0 0 0 0 
+state.TipoPagamento 0 0 0 0 0 0 1 1 
+state.Cartao 0 0 0 0 0 1 0 1 
+state.Dinheiro 0 0 0 0 1 0 0 1 
+state.SomaDinheiro 0 0 0 1 0 0 0 1 
+state.Troco 0 0 1 0 0 0 0 1 
+state.Dispenser 0 1 0 0 0 0 0 1 
+state.Cancelar 1 0 0 0 0 0 0 1 

@@ -1,0 +1,125 @@
+------------------------------------------------------------
+TimeQuest Timing Analyzer Summary
+------------------------------------------------------------
+
+Type  : Slow Model Setup 'state.TipoPagamento'
+Slack : -4.197
+TNS   : -4.197
+
+Type  : Slow Model Setup 'state.SomaDinheiro'
+Slack : -4.144
+TNS   : -17.496
+
+Type  : Slow Model Setup 'state.Cancelar'
+Slack : -2.360
+TNS   : -67.642
+
+Type  : Slow Model Setup 'state.Cartao'
+Slack : -2.042
+TNS   : -10.100
+
+Type  : Slow Model Setup 'clk'
+Slack : -1.710
+TNS   : -6.444
+
+Type  : Slow Model Hold 'state.Cancelar'
+Slack : -3.027
+TNS   : -13.398
+
+Type  : Slow Model Hold 'clk'
+Slack : -2.062
+TNS   : -9.220
+
+Type  : Slow Model Hold 'state.Cartao'
+Slack : -1.849
+TNS   : -8.203
+
+Type  : Slow Model Hold 'state.SomaDinheiro'
+Slack : -1.301
+TNS   : -1.301
+
+Type  : Slow Model Hold 'state.TipoPagamento'
+Slack : -1.248
+TNS   : -1.248
+
+Type  : Slow Model Minimum Pulse Width 'clk'
+Slack : -1.380
+TNS   : -9.380
+
+Type  : Slow Model Minimum Pulse Width 'state.Cancelar'
+Slack : 0.500
+TNS   : 0.000
+
+Type  : Slow Model Minimum Pulse Width 'state.Cartao'
+Slack : 0.500
+TNS   : 0.000
+
+Type  : Slow Model Minimum Pulse Width 'state.SomaDinheiro'
+Slack : 0.500
+TNS   : 0.000
+
+Type  : Slow Model Minimum Pulse Width 'state.TipoPagamento'
+Slack : 0.500
+TNS   : 0.000
+
+Type  : Fast Model Setup 'state.TipoPagamento'
+Slack : -1.691
+TNS   : -1.691
+
+Type  : Fast Model Setup 'state.SomaDinheiro'
+Slack : -1.674
+TNS   : -2.144
+
+Type  : Fast Model Setup 'state.Cartao'
+Slack : -0.684
+TNS   : -3.322
+
+Type  : Fast Model Setup 'state.Cancelar'
+Slack : -0.673
+TNS   : -19.836
+
+Type  : Fast Model Setup 'clk'
+Slack : -0.128
+TNS   : -0.235
+
+Type  : Fast Model Hold 'state.Cancelar'
+Slack : -1.729
+TNS   : -7.880
+
+Type  : Fast Model Hold 'clk'
+Slack : -1.289
+TNS   : -6.503
+
+Type  : Fast Model Hold 'state.Cartao'
+Slack : -1.137
+TNS   : -5.296
+
+Type  : Fast Model Hold 'state.SomaDinheiro'
+Slack : -0.545
+TNS   : -0.545
+
+Type  : Fast Model Hold 'state.TipoPagamento'
+Slack : -0.528
+TNS   : -0.528
+
+Type  : Fast Model Minimum Pulse Width 'clk'
+Slack : -1.380
+TNS   : -9.380
+
+Type  : Fast Model Minimum Pulse Width 'state.Cancelar'
+Slack : 0.500
+TNS   : 0.000
+
+Type  : Fast Model Minimum Pulse Width 'state.Cartao'
+Slack : 0.500
+TNS   : 0.000
+
+Type  : Fast Model Minimum Pulse Width 'state.SomaDinheiro'
+Slack : 0.500
+TNS   : 0.000
+
+Type  : Fast Model Minimum Pulse Width 'state.TipoPagamento'
+Slack : 0.500
+TNS   : 0.000
+
+------------------------------------------------------------
